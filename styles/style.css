@@ -1,3 +1,16 @@
+
+/*********/
+/* FONTS */
+/*********/
+@font-face {
+  font-family: 'Playhouse', sans-serif;
+  src:url("../fonts/Playhouse.ttf") format("truetype");	
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
 /**************/
 /* CSS REMEDY */
 /**************/
@@ -5,10 +18,6 @@
 /* naar een idee van Jen Simmons */
 *, *::after, *::before {
   box-sizing:border-box;  
-}
-
-body {
-  margin:0;
 }
 
 button:not([disabled]) {
@@ -28,9 +37,18 @@ img {
 /*********************/
 
 :root {
-  --color-headings:crimson
-  /* ... */
-
+  --color-headings:crimson;
+  --color-text-1: #fff;
+  --color-uitklapsection: #F9B43D;
+  --color-buttons: #0079BE;
+  --color-buttons-border: #065272;
+  --color-buttons-text: #fff;
+  --color-gloed-1: #F2A81E;
+  --color-gloed-2: #FC7E05;
+  --color-gloed-3: #06EFFE;
+  --color-gloed-4: #019BFD;
+  --color-disabled-button: #B2B2B2;
+  --color-disabled-button-border: #828282;
 }
 
 
@@ -41,10 +59,525 @@ img {
 /* ALGEMENE STYLING */
 /********************/
 
-h1 {
-  color:var(--color-headings);
+body {
+  margin:0;
+  display: grid;
+  grid-template-columns: 1fr 21em;
 }
 
-/* ... */
+/* ZERO STATE ********************************************************************************************************/
 
+body > section:first-of-type{
+  background-color: #000;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 1;
+}
+
+body > section:first-of-type img{
+  width: 30em;
+}
+
+body > section:first-of-type button:hover{
+  cursor: default;
+}
+
+body > section:first-of-type.startspel{
+  display: none;
+}
+
+/* EERSTE SECTION ********************************************************************************************************/
+
+/* ALGEMENE STYLING EERSTE SECTION */
+body > section:nth-of-type(2){
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(../images/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+h1, h2 {
+  color:var(--color-text-1);
+  font-family: 'Playhouse', sans-serif;
+  -webkit-text-stroke-width: .8px;
+  -webkit-text-stroke-color: black;
+  font-size: 2em;
+  text-align: center;
+}
+
+h1{
+  position: fixed;
+  top: 1em;
+  padding: 0 1em;
+}
+
+h1.technieknaam{
+  font-size: 4em;
+}
+
+h1.gescoord{
+  font-size: 8em;
+  text-transform: uppercase;
+}
+
+/* DOEL */
+body > section:nth-of-type(2) ul:first-of-type{
+  background-color: transparent;
+  padding: 2em 0;
+  position: absolute;
+  top: 11.5em;
+  width:28em;
+  height:15em;
+}
+
+body > section:nth-of-type(2) ul:first-of-type li {
+  display:none;
+}
+
+
+/* EASTEREGG / */
+/* met hulp van steven en ruben */
+#eastereggs{
+  background-color: transparent;
+  padding: 3em;
+  aspect-ratio: 1/1;
+  position: absolute;
+  left: 0 ;
+  bottom: 0;
+}
+
+#eastereggs li{
+  display: none;
+}
+
+body > section:nth-of-type(2) > img:last-of-type{
+  position: fixed;
+  right: 0;
+  display: none;
+}
+
+body > section:nth-of-type(2) > img:last-of-type.show{
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100
+}
+
+
+/* VOETBAL  */
+body > section:nth-of-type(2) ul:nth-of-type(2){
+  width: 7%;
+  position: absolute;
+  bottom: 5.5em;
+  padding: 0;
+  margin: 0;
+}
+
+body > section:nth-of-type(2) ul:nth-of-type(2) img{
+  width: 100%;
+  aspect-ratio: 1/1;
+  display:block;
+}
+
+body > section:nth-of-type(2) ul:nth-of-type(2) img:hover{
+  cursor: url(../images/shoe.png), grab;
+}
+
+body > section:nth-of-type(2) ul li{
+  list-style-type: none;
+}
+
+
+/* ANIMATIE OM DE BAL TE LATEN SCHIETEN */
+body > section:nth-of-type(2) ul:nth-of-type(2) img.schieten{
+  animation-name: shoot;
+  animation-duration: 3s;
+}
+
+@keyframes shoot {
+  0% {
+	  transform: translateY(0);
+	}
+	15% ,100% {
+	  transform: translateY(-12em);
+	}
+}
+
+
+
+/* MARK EVANS  */
+body > section:nth-of-type(2) > img:first-of-type{
+  width: 9em;
+}
+
+body > section:nth-of-type(2) > img:first-of-type.markweg{
+  display: none;
+}
+
+
+
+/* TECHNIEKEN */
+body > section:nth-of-type(2) > img:nth-of-type(2){
+  position: fixed;
+  Top: 15em;
+  width: 9em;
+}
+
+body > section:nth-of-type(2) > img:nth-of-type(2).singlehand{
+  animation-name: hand_van_god, hand_van_god_licht;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hand_van_god {
+  0% {
+	  transform: scale(0);
+	}
+	25% ,100% {
+	  transform: scale(170%);
+	}
+}
+
+@keyframes hand_van_god_licht {
+  0% {
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-2))
+		drop-shadow(0 0 .1em var(--color-gloed-2));
+	}
+	10% {
+	  filter:
+		drop-shadow(0 0 .5em var(--color-gloed-1))
+		drop-shadow(0 0 .5em var(--color-gloed-2));
+	}
+  20% {
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-2))
+		drop-shadow(0 0 .1em var(--color-gloed-2));
+	}
+	30% {
+	  filter:
+		drop-shadow(0 0 .5em var(--color-gloed-1))
+		drop-shadow(0 0 .5em var(--color-gloed-2));
+	}
+  40% {
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-2))
+		drop-shadow(0 0 .1em var(--color-gloed-2));
+	}
+	50% {
+	  filter:
+		drop-shadow(0 0 .5em var(--color-gloed-1))
+		drop-shadow(0 0 .5em var(--color-gloed-2));
+	}
+  60% {
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-2))
+		drop-shadow(0 0 .1em var(--color-gloed-2));
+	}
+	70% {
+	  filter:
+		drop-shadow(0 0 .5em var(--color-gloed-1))
+		drop-shadow(0 0 .5em var(--color-gloed-2));
+	}
+  80% {
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-2))
+		drop-shadow(0 0 .1em var(--color-gloed-2));
+	}
+	90% {
+	  filter:
+		drop-shadow(0 0 .5em var(--color-gloed-1))
+		drop-shadow(0 0 .5em var(--color-gloed-2));
+	}
+  100% {
+    filter:
+		drop-shadow(0 0 0em var(--color-gloed-2))
+		drop-shadow(0 0 0em var(--color-gloed-2));
+	}
+}
+
+
+
+body > section:nth-of-type(2) > img:nth-of-type(2).fist{
+  animation-name: vuurbalknokkel, vuurbalknokkel_licht;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  position: fixed;
+  Top: 18em;
+}
+
+@keyframes vuurbalknokkel {
+  0% {
+	  transform: scale(0);
+	}
+	25% ,100% {
+	  transform: scale(170%);
+	}
+}
+
+@keyframes vuurbalknokkel_licht {
+  0% {
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-2))
+		drop-shadow(0 0 .1em var(--color-gloed-2));
+	}
+	10% {
+	  filter:
+		drop-shadow(0 0 .2em var(--color-gloed-1))
+		drop-shadow(0 0 .2em var(--color-gloed-2));
+	}
+  20% {
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-2))
+		drop-shadow(0 0 .1em var(--color-gloed-2));
+	}
+	30% {
+	  filter:
+		drop-shadow(0 0 .2em var(--color-gloed-1))
+		drop-shadow(0 0 .2em var(--color-gloed-2));
+	}
+  40% {
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-2))
+		drop-shadow(0 0 .1em var(--color-gloed-2));
+	}
+	50% {
+	  filter:
+		drop-shadow(0 0 .2em var(--color-gloed-1))
+		drop-shadow(0 0 .2em var(--color-gloed-2));
+	}
+  60% {
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-2))
+		drop-shadow(0 0 .1em var(--color-gloed-2));
+	}
+	70% {
+	  filter:
+		drop-shadow(0 0 .2em var(--color-gloed-1))
+		drop-shadow(0 0 .2em var(--color-gloed-2));
+	}
+  80% {
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-2))
+		drop-shadow(0 0 .1em var(--color-gloed-2));
+	}
+	90% {
+	  filter:
+		drop-shadow(0 0 .2em var(--color-gloed-1))
+		drop-shadow(0 0 .2em var(--color-gloed-2));
+	}
+  100% {
+    filter:
+		drop-shadow(0 0 0em var(--color-gloed-2))
+		drop-shadow(0 0 0em var(--color-gloed-2));
+	}
+}
+
+body > section:nth-of-type(2) > img:nth-of-type(2).fist2{
+  animation-name: vuist_der_gerechtigheid;
+  animation-duration: 2s 2s;
+  animation-fill-mode: forwards forwards;
+}
+
+@keyframes vuist_der_gerechtigheid {
+  0% {
+	  transform: rotate(0) scale(0);
+	}
+	25% ,100% {
+	  transform: rotate(720deg) scale(170%);
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-1))
+		drop-shadow(0 0 .2em var(--color-gloed-1));
+	}
+}
+
+
+body > section:nth-of-type(2) > img:nth-of-type(2).fiststanding{
+  animation-name: verwoestende_hamer;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  Top: 5.5em;
+}
+
+@keyframes verwoestende_hamer {
+  0% {
+	  transform: scale(100%) translateY(0);
+	}
+	25% ,100% {
+	  transform: scale(150%) translateY(8em);
+    filter:
+		drop-shadow(0 .5em .1em var(--color-gloed-2))
+		drop-shadow(0 .6em .2em var(--color-gloed-1));
+	}
+}
+
+body > section:nth-of-type(2) > img:nth-of-type(2).dome{
+  animation-name: ultradimensie_hand;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  Top: 19.5em;
+}
+
+@keyframes ultradimensie_hand {
+  0% {
+	  transform: scale(0);
+	}
+	25% ,100% {
+	  transform: scale(250%);
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-1))
+		drop-shadow(0 0 .2em var(--color-gloed-1));
+	}
+}
+
+body > section:nth-of-type(2) > img:nth-of-type(2).doublehands{
+  animation-name: greep_van_god, greep_van_god_licht;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes greep_van_god {
+  0% {
+	  transform: scale(0);
+	}
+	25% ,100% {
+	  transform: scale(250%);
+	}
+}
+
+@keyframes greep_van_god_licht {
+  0% {
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-3))
+		drop-shadow(0 0 .1em var(--color-gloed-4));
+    transform: rotate(0);
+	}
+	10% {
+	  filter:
+		drop-shadow(0 0 .5em var(--color-gloed-1))
+		drop-shadow(0 0 .5em var(--color-gloed-2));
+    transform: rotate(10deg);
+	}
+  20% {
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-3))
+		drop-shadow(0 0 .1em var(--color-gloed-4));
+	}
+	30% {
+	  filter:
+		drop-shadow(0 0 .5em var(--color-gloed-1))
+		drop-shadow(0 0 .5em var(--color-gloed-2));
+	}
+  40% {
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-3))
+		drop-shadow(0 0 .1em var(--color-gloed-4));
+	}
+	50% {
+	  filter:
+		drop-shadow(0 0 .5em var(--color-gloed-1))
+		drop-shadow(0 0 .5em var(--color-gloed-2));
+	}
+  60% {
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-3))
+		drop-shadow(0 0 .1em var(--color-gloed-4));
+	}
+	70% {
+	  filter:
+		drop-shadow(0 0 .5em var(--color-gloed-1))
+		drop-shadow(0 0 .5em var(--color-gloed-2));
+	}
+  80% {
+    filter:
+		drop-shadow(0 0 .1em var(--color-gloed-3))
+		drop-shadow(0 0 .1em var(--color-gloed-4));
+	}
+	90% {
+	  filter:
+		drop-shadow(0 0 .5em var(--color-gloed-1))
+		drop-shadow(0 0 .5em var(--color-gloed-2));
+	}
+  100% {
+    filter:
+		drop-shadow(0 0 0em var(--color-gloed-3))
+		drop-shadow(0 0 0em var(--color-gloed-4));
+	}
+}
+
+body > section:nth-of-type(2) > img:last-of-type{
+  width: 9em;
+  position: fixed;
+}
+
+
+/* BLIKSEM */
+body > section:nth-of-type(2) > img:nth-of-type(3){
+  position: absolute;
+}
+
+
+/* KNOP OM DE BAL TE SCHIETEN */
+body button{
+  background-color: var(--color-buttons);
+  border: 3px solid var(--color-buttons-border);
+  color: var(--color-buttons-text);
+  padding: 1em 1.5em;
+  text-transform: uppercase;
+  font-weight: 800;
+  position: fixed;
+  bottom: 2em;
+  border-radius: 40px;
+  box-shadow: 0 0.2em 0 #000;
+}
+
+body button:hover{
+  background-color: var(--color-buttons-border);
+  border: 3px solid var(--color-buttons);
+  cursor: url(../images/shoe.png), grab;
+}
+
+body button:active{
+  transform: translateY(.2em);
+}
+
+body button:disabled{
+  background-color: var(--color-disabled-button);
+  border: 3px solid var(--color-disabled-button-border);
+  box-shadow: 0 0.2em 0 transparent;
+}
+
+body button:disabled:hover{
+  cursor: default;
+}
+
+
+/* TWEEDE SECTION ********************************************************************************************************/
+body > section:nth-of-type(3){
+  background-color: var(--color-uitklapsection);
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	height: 100%;
+}
+
+body > section:nth-of-type(3) p{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  padding: 0 2em;
+}
+
+body > section:nth-of-type(3) p:nth-of-type(2){
+  font-weight: bolder;
+  color: var(--color-text-1);
+}
 
